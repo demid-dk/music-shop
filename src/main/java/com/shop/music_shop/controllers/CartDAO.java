@@ -4,7 +4,6 @@ package com.shop.music_shop.controllers;
 import com.shop.music_shop.models.Record;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
