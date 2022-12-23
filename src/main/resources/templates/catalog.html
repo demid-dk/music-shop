@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="~{blocks/head}">
+</head>
+<link rel="stylesheet" href="/css/catalog.css">
+<body>
+  <header th:insert="blocks/header :: header" class="header"></header>
+
+  <main class="main">
+    <section class="section">
+      <div class="section__container container-xl">
+        <h1 class="page__title">Каталог</h1>
+        <div class="filter">
+          <form th:action="@{/records/}" class="form d-flex">
+            <input class="form-control" type="search" name="keyword" id="bigSearchField" placeholder="Введите альбом или музыканта">
+            <button class="btn-reset big-search-btn btn-dk btn--green" type="submit">Искать</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section catalog">
+      <div class="section__container container-xl">
+        <div class="catalog__sort d-flex">
+          <div class="catalog__sort-view" th:text="((${currentPage}-1)*${pageSize}+1)
+          + ' - ' + ${currentPage}*${pageSize} + ' / ' +  ${totalItems}">1 - 25 / 14018</div>
+          <div class="catalog__sort-type">
+            <form id="sortingForm" th:method="GET" th:action="@{/records/}" class="sorting-select d-flex">
+              <label for="sorting" class="control-label">Сортировка</label>
+              <div class="btn-group bootstrap-select form-control form-control--border">
+                <select class="form-control form-control--border" name="sort" id="sorting" placeholder="нажмите для выбора">
+                  <option value="">Без сортировки</option>
+                  <option value="price,asc">Сначала дешёвые</option>
+                  <option value="price,desc">Сначала дорогие</option>
+                  <option value="year,desc">Сначала новые</option>
+                </select>
+                <button class="btn-reset btn-sort btn-dk btn--green" type="submit">Отсортировать</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <a th:if="${records.isEmpty()}" th:href="@{/records/new}">Добавить Каталог из Csv файла</a>
+
+        <ul th:if="${!records.isEmpty()}" class="catalog__list list-reset d-flex">
+          <li th:each="record : ${records}" class="catalog__item album">
+            <div class="album__cover">
+              <a th:href="@{/records/{id}(id=${record.getId()})}" class="album__cover-link">
+                <img class="album__cover-image" src="https://vinyl.ru/upload/resizeImg/detail/00-00044488/main_site_photo.jpg" alt="" srcset="">
+              </a>
+            </div>
+            <div class="album__cont">
+              <h4 class="album__title">
+                <a th:href="@{/records/{id}(id=${record.getId()})}" class="album__title-link">
+                  <span class="album__artist" th:text="${record.getMusician()}">Pink Floyd</span><br>
+                  <span class="album__name" th:text="${record.getName()}">The Dark Side Of The...</span>
+                </a>
+              </h4>
+            </div>
+            <div class="album__footer">
+              <div class="price d-flex">
+                <div class="price-sum">
+                  <span class="price__current" th:text="${record.getPrice()} + ' ₽'"></span>
+                </div>
+                <form th:action="@{/records/}" th:method="POST">
+                  <button type="submit" class="btn-reset btn-add-to-cart">
+                    <input type="hidden" name="id" th:value="${record.getId()}">
+                    <div class="icon-cart-plus"></div>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="pagenav d-flex">
+          <div class="catalog__sort-view" th:text="((${currentPage}-1)*${pageSize}+1)
+          + ' - ' + ${currentPage}*${pageSize} + ' / ' +  ${totalItems}">1 - 25 / 14018</div>
+
+          <nav aria-label="Pagination">
+            <ul class="pagination">
+              <li class="page-item" aria-current="page" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:replace="blocks/paging :: paging(1, '<<', 'First Page')" class="page-link"></a>
+              </li>
+
+              <li class="page-item font-weight-bold" th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:replace="blocks/paging :: paging(${currentPage - 1}, 'Prev', 'Previous Page')"></a>
+              </li>
+
+              <li class="page-item" th:if="${currentPage - 2 > 1}">
+                <a class="page-link" href="#">...</a>
+              </li>
+
+              <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                  th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                <a class="page-link" th:replace="blocks/paging :: paging(${page}, ${page}, 'Page ' + ${page})"></a>
+              </li>
+
+              <li class="page-item" th:if="${currentPage + 2 < totalPages}">
+                <a class="page-link" href="#">...</a>
+              </li>
+
+              <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a class="page-link" th:replace="blocks/paging :: paging(${currentPage + 1},'Next', 'Next Page')"></a>
+              </li>
+
+              <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a class="page-link" th:replace="blocks/paging :: paging(${totalPages}, '>>', 'Last Page')"></a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="scroll">
+            <a href="#" class="btn-reset btn-scroll-top">Наверх</a>
+          </div>
+        </div>
+        <a th:href="@{/records/new}">Добавить пластинку</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" id="footer" th:insert="blocks/footer :: footer"></footer>
+
+  <div th:insert="blocks/js :: js"></div>
+</body>
+</html>

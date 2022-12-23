@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="~{blocks/head}">
+</head>
+<body>
+  <header th:insert="blocks/header :: header" class="header"></header>
+
+  <main class="main">
+    <section class="section basket">
+      <div class="section__container container-xl">
+        <div class="back">
+          <a th:href="@{/records/}" class="back__link">Назад в каталог</a>
+        </div>
+
+        <h1 class="page__title">Корзина</h1>
+
+        <div class="basket">
+          <h2 th:if="${records.isEmpty()}" class="basket__title">Ваша корзина пуста</h2>
+          <table th:if="${!records.isEmpty()}" class="basket__table table align-middle">
+            <thead class="table__head">
+            <th class="head__item" scope="col">Товар №</th>
+            <th class="head__item" scope="col">Товар</th>
+            <th class="head__item" scope="col">Формат</th>
+            <th class="head__item" scope="col">Стоимость</th>
+            <th class="head__item" scope="col">Кол-во</th>
+            <th class="head__item" scope="col">Удалить</th>
+            <th class="head__item" scope="col">Итого</th>
+            </thead>
+            <tbody class="table__body">
+            <tr th:each="record, num : ${records}" class="table__row">
+              <td th:text="${num.index}" class="table__item">00057108</td>
+              <td class="table__item table__album d-flex">
+                <img src="https://vinyl.ru/upload/resizeImg/catalog/00-00057108/main_site_photo.jpg" alt="" class="table__album-cover">
+                <p th:text="${record.getMusician()}" class="table__album-musician">Slipknot.</p>
+                <p th:text="${record.getName()}" class="table__album-name">.5: The Gray Chapter</p>
+              </td>
+              <td class="table__item">2LP</td>
+              <td th:text="${record.getPrice()} + ' ₽'" class="table__item">5 500 ₽</td>
+              <td class="table__item"><input class="table__num-input" type="number" name="" id="" value="1"></td>
+              <td class="table__item">
+                <form th:action="@{/cart}" th:method="DELETE">
+                  <input type="hidden" name="id" th:value="${num.index}">
+                  <button type="submit" class="btn-reset btn-delete"><div class="icon-cancel"></div></button>
+                </form>
+              </td>
+              <td th:text="${record.getPrice()} + ' ₽'" class="table__item">5 500 ₽</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer" th:insert="blocks/footer :: footer"></footer>
+
+  <div th:insert="blocks/js :: js"></div>
+</body>
+</html>

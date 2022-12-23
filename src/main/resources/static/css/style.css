@@ -1,0 +1,193 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+:root {
+  --col_f62e5d: #f62e5d;
+  --col_76f12d: #76f12d;
+  --col_273c55: #273c55;
+}
+
+/* global */
+.hidden {
+  display: none;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.btn-reset {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.container-xl {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.section {
+  padding: 50px 0;
+}
+
+
+/* header */
+.header {
+  background-color: #f62e5e;
+}
+
+.header__container {
+  padding: 10px 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  width: auto;
+  height: 50px;
+}
+
+.nav__item {
+  margin-right: 40px;
+}
+
+.nav__link {
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+  transition: 0.4s color ease-in-out;
+}
+
+.nav__link:hover {
+  color: #76f12d;
+}
+
+.nav__link:active {
+  color: #e0e0e0;
+}
+
+.btn-list {
+  align-items: center;
+}
+
+.btn-list__icon::before {
+  font-size: 24px;
+  color: #fff;
+  transition: 0.4s color ease-in-out;
+}
+
+.btn-list__icon:hover::before {
+  color: #e0e0e0;
+}
+
+.btn-list__icon:active::before {
+  color: #e0e0e0;
+}
+
+
+/* footer */
+.footer {
+  padding: 30px 0;
+  background: #e5e5e5;
+}
+
+.footer__title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.social {
+  justify-content: space-around;
+}
+
+.social__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.social__icon_dk {
+  background-image: url('../img/demidkopan.jpg');
+  background-size: 200%;
+  background-position: center;
+}
+
+.social__icon_ep {
+  background-image: url('../img/egorpanin.jpg');
+  background-size: 75%;
+  background-position: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .section {
+    padding: 30px 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .nav {
+    justify-content: flex-end;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .nav__btn-list {
+    justify-content: flex-end;
+  }
+
+  .nav__item {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+
+  .nav__item:first-child {
+    margin-top: 15px;
+  }
+
+  .search__field {
+    position: absolute;
+    left: calc(-100% - 15px);
+  }
+}

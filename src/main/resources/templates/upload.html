@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="~{blocks/head}">
+</head>
+<body>
+  <header th:insert="blocks/header :: header" class="header"></header>
+
+  <main class="main">
+    <section class="section hero">
+      <div class="section-container container-xl">
+        <form th:action="@{/upload-many}" th:method="POST" enctype="multipart/form-data">
+          <h2>Загрузить csv файл</h2>
+          <button type="submit">Загрузить</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer" th:insert="blocks/footer :: footer"></footer>
+
+  <div th:insert="blocks/js :: js"></div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:insert="~{blocks/head}">
+</head>
+<body>
+  <header th:insert="blocks/header :: header" class="header"></header>
+
+  <main class="main">
+    <section class="section hero">
+      <div class="section__container container-xl">
+        <a th:href="@{/records/{id}(id=${record.getId()})}">Назад к пластинке</a>
+        <h1 class="mb-5">Изменить пластинку</h1>
+        <form th:action="@{/records/{id}/edit(id=${record.getId()})}" th:object="${record}" th:method="PATCH">
+          <label for="record_name">Альбом</label>
+          <input type="text" th:field="*{name}" id="record_name" class="form-control mb-3" placeholder="Введите название пластинки">
+          <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+
+          <label for="record_musician">Исполнитель</label>
+          <input type="text" th:field="*{musician}" id="record_musician" class="form-control mb-3" placeholder="Введите музыканта пластинки">
+          <div th:if="${#fields.hasErrors('musician')}" th:errors="*{musician}">Musician error</div>
+
+          <label for="record_genre">Жанр</label>
+          <input type="text" th:field="*{genre}" name="genre" id="record_genre" class="form-control mb-3" placeholder="Введите жанр пластинки">
+          <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre error</div>
+
+          <label for="record_label">Лейбл</label>
+          <input type="text" th:field="*{label}" name="record_label" id="record_label" class="form-control mb-3" placeholder="Введите лейбл">
+          <div th:if="${#fields.hasErrors('label')}" th:errors="*{label}">Label error</div>
+
+          <label for="record_genre">Формат</label>
+          <input type="text" th:field="*{format}" name="format" id="record_format" class="form-control mb-3" placeholder="Введите формат пластинки">
+          <div th:if="${#fields.hasErrors('format')}" th:errors="*{format}">Format error</div>
+
+          <label for="record_condition">Состояние</label>
+          <input type="text" th:field="*{recordCondition}" name="record_condition" id="record_condition" class="form-control mb-3" placeholder="Введите состояние пластинки">
+          <div th:if="${#fields.hasErrors('recordCondition')}" th:errors="*{recordCondition}">Condition error</div>
+
+          <label for="record_year">Год</label>
+          <input type="number" th:field="*{year}" name="year" id="record_year" class="form-control mb-3" placeholder="Введите год выпуска пластинки">
+          <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year error</div>
+
+          <label for="record_price">Цена</label>
+          <input type="number" th:field="*{price}" name="price" id="record_price" class="form-control mb-3" placeholder="Введите цену пластинки">
+          <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price error</div>
+
+          <button type="submit" class="btn-reset btn-success">Изменить</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer" th:insert="blocks/footer :: footer"></footer>
+
+  <div th:insert="blocks/js :: js"></div>
+</body>
+</html>

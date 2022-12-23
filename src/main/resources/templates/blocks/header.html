@@ -1,0 +1,48 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="header" class="header__container container-xl d-flex">
+  <a th:href="@{/}" class="header__logo-link">
+    <img class="header__logo logo" src="/img/logo.png">
+  </a>
+
+  <nav class="header__nav nav navbar navbar-expand-sm">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="list-reset nav__list d-flex">
+        <li class="nav__item">
+          <a th:href="@{/records/}" class="nav__link">Каталог</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="" class="nav__link">Жанры</a>
+        </li>
+
+        <li class="nav__item">
+          <a href="#footer" class="nav__link">О&nbsp;нас</a>
+        </li>
+      </ul>
+      <ul class="nav__btn-list list-reset btn-list d-flex">
+        <li class="btn-list__item search d-flex">
+          <form class="hidden" id="searchForm" th:action="@{/records/}" th:method="GET">
+            <input id="searchField" class="search__field" type="search" name="keyword" placeholder="Поиск по каталогу">
+            <button type="submit">
+              <div class="icon-search"></div>
+            </button>
+          </form>
+          <button id="searchBtn" class="btn-reset btn-list__btn search__btn">
+            <div class="btn-list__icon icon-search"></div>
+          </button>
+        </li>
+
+        <li class="btn-list__item bucket">
+          <a class="btn-reset btn-list__btn bucket__btn" th:href="@{/cart}">
+            <div class="btn-list__icon icon-basket"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,6 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<a th:fragment="paging(pageNum, label, tooltip)" class="page-link"
+   th:href="@{'/records/?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''}
+                         + 'page=' + ${pageNum} + '&size=' + ${pageSize}
+                         + ${sortField!=null ? '&sort=' + sortField + ',' + sortDirection : ''}}"
+   th:title="${tooltip}" rel="tooltip" th:text="${label}"></a>

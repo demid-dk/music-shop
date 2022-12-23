@@ -1,0 +1,46 @@
+.record__text {
+  margin-left: 40px;
+}
+
+.record__name {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 48px;
+}
+
+.record__artist {
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.record__buy-btn {
+  margin-top: 15px;
+  padding: 15px 20px;
+  background-color: #f62e5d;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .record__album {
+    flex-direction: column;
+  }
+  
+  .record__cover {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .record__image {
+    max-width: 320px;
+  }
+
+  .record__text {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .record__image {
+    max-width: 100%;
+  }
+}

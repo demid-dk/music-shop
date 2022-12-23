@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://thymeleaf.org">
+<head th:insert="~{blocks/head}">
+</head>
+<link rel="stylesheet" href="/css/record.css">
+<body>
+  <header th:insert="blocks/header :: header" class="header"></header>
+
+<!--  <form th:action="@{/records/{id}(id=${record.getId()})}" th:method="DELETE">-->
+<!--    <input type="submit" value="Удалить">-->
+<!--  </form>-->
+
+  <main class="main">
+    <section class="section record">
+      <div class="section__container container-xl">
+        <div class="breadcrumb">
+          <ul class="list-reset breadcrumb__list">
+            <li class="breadcrumb__item">
+              <a th:href="@{/}" class="breadcrumb__link">Главная</a>
+            </li>
+
+            <li class="breadcrumb__item">
+              <a th:href="@{/records/}" class="breadcrumb__link">Каталог</a>
+            </li>
+
+            <li class="breadcrumb__item">
+              <a th:href="@{/records/{id}(id=${record.getId()})}" th:text="${record.getName()}" class="breadcrumb__link">Primus - Animals Should Not Try To Act Like People</a>
+            </li>
+          </ul>
+        </div>
+        <div class="record__album d-flex">
+          <div class="record__cover">
+            <img class="record__image img-fluid" src="/img/primus-asnttalp.jpg">
+          </div>
+          <div class="record__text">
+            <h1 class="record__name" th:text="${record.getName()}">Animals Should Not Try To Act Like People</h1>
+            <h2 class="record__artist" th:text="${record.getMusician()}">Primus</h2>
+            <p class="record__genre" th:text="'Стиль: ' + ${record.getGenre()}">Стиль: Alternative Rock</p>
+            <p class="record__year" th:text="'Год релиза: ' + ${record.getYear()}">Год релиза альбома: 2004</p>
+            <p class="record__label" th:text="'Лейбл: ' + ${record.getLabel()}">Лейбл: Mobile Fidelity Sound Lab</p>
+            <p class="record__format" th:text="'Формат носителя: ' + ${record.getFormat()}">Формат носителя: LP</p>
+            <p class="record__condition" th:text="'Состояние пластинки: ' + ${record.getRecordCondition()}">Состояние: Near Mint</p>
+            <button class="btn-reset record__buy-btn" th:text="'Купить за ' + ${record.getPrice()} + '₽'">Купить за 20 000 руб.</button>
+            <a th:href="@{/records/{id}/edit(id=${record.getId()})}">Изменить</a>
+            <form th:action="@{/records/{id}(id=${record.getId()})}" th:method="DELETE">
+              <button type="submit">Удалить</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section artist-records">
+      <div class="container section-container">
+        <h2 class="section__title">Другие пластинки от артиста</h2>
+        <div class="section__slider slider">
+          <ul th:each="ar : ${artistRecords}" class="list-reset slider__list">
+            <li class="slider__record">
+              <img src="" alt="" class="slider__record-image">
+              <span class="slider__record-name"></span>
+              <span class="slider__record-price"></span>
+              <button class="btn-reset slider__buy-btn"></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section genre-records">
+      <div class="container section-container">
+        <h2 class="section__title">Другие пластинки в жанре</h2>
+        <div class="section__slider slider">
+          <ul th:each="gr : ${genreRecords}" class="list-reset slider__list">
+            <li class="slider__record">
+              <img src="" alt="" class="slider__record-image">
+              <span class="slider__record-name"></span>
+              <span class="slider__record-price"></span>
+              <button class="btn-reset slider__buy-btn"></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer" th:insert="blocks/footer :: footer"></footer>
+
+  <div th:insert="blocks/js :: js"></div>
+</body>
+</html>
